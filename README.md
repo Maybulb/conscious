@@ -15,12 +15,12 @@ I'm looking to build an easy API to use with only a few pieces of information.
 
 ```json
 {
+	"awake": false,
 	"last_online": {
-		"telegram": {"date":"26 06 15", "time":"01:15 PST"},
+		"telegram": {"date":"26 06 15", "time":"24:15 PST"},
 		"github"  : {"date":"25 06 15", "time":"23:55 PST"},
-		"lastfm"  : {"date":"27 06 15", "time":"7:10 PST", "energy": 1}
-	},
-	"awake": false
+		"lastfm"  : {"date":"26 06 15", "time":"7:10 PST", "energy": 1}
+	}
 }
 ```
 
