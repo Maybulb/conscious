@@ -19,7 +19,7 @@ I'm looking to build an easy API to use with only a few pieces of information.
 	"last_online": {
 		"telegram": {"date":"26 06 15", "time":"24:15 PST"},
 		"github"  : {"date":"25 06 15", "time":"23:55 PST"},
-		"lastfm"  : {"date":"26 06 15", "time":"7:10 PST", "energy": 1}
+		"lastfm"  : {"date":"26 06 15", "time":"07:10 PST", "energy": 1}
 	}
 }
 ```
