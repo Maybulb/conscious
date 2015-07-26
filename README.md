@@ -31,13 +31,14 @@ The "energy" level is as follows:
 Resources
 ---------
 
-I'm gonna need, like, *counting* **one, two, three** APIs (at least) to get this working. Here's a list of them:
+I'm gonna need at least 4 APIs to get this working. Here's a list of them:
 
 - [Telegram](https://core.telegram.org/#getting-started)
 - [Last.fm](http://www.last.fm/api)
 - [GitHub](https://developer.github.com/v3/)
+- [Echo Nest API](http://developer.echonest.com/docs/v4)
 
-Oh, we're also gonna use the [Echo Nest API](http://developer.echonest.com/docs/v4) for tracking the energy of a song, as glossed over above. This is gonna hook in with Last.fm so we can get a song's information on a deeper level, which will be important.
+The Echo Nest API will be for tracking the energy of a song, as glossed over above. This is gonna hook in with Last.fm so we can get a song's information on a deeper level, which will be important.
 
 LICENSE
 -------
