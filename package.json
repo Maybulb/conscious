@@ -1,0 +1,29 @@
+{
+  "name": "is-adam-awake",
+  "version": "0.0.1",
+  "description": "Is Adam Lewes?",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/probablyjosh/is-adam-awake.git"
+  },
+  "keywords": [
+    "adam",
+    "lewes",
+    "adamlewes",
+    "awake",
+    "sleeping"
+  ],
+  "author": "Josh Trommel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/probablyjosh/is-adam-awake/issues"
+  },
+  "homepage": "https://github.com/probablyjosh/is-adam-awake#readme",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
