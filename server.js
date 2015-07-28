@@ -9,12 +9,15 @@ var port = process.env.PORT || 8080
 var router = express.Router();
 
 var urls = {
-  // lastfm's URL is absolutely ridiculous why isn't JSON default wtf
   // "telegram"   : "",
-  "lastfm" : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
+  // "instagram"  : "",
+  "lastfm"   : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
             "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
   "github"   : "https://api.github.com/users/lwwws",
-  // "echo"     : ""
+  "echo"     : "http://developer.echonest.com/api/v4/song/search?api_key=" +
+                process.env.ECHONEST_KEY + "&title=" + "Fallen Leaves" +
+                "&artist=" + "Billy Talent" + "&results=1&sort=duration-desc" +
+                "&bucket=audio_summary"
 }
 
 // asssssynchronous  mMMMMMM good shit
@@ -29,7 +32,7 @@ function getPage(url) {
 
 var json = {
   "sleeping":false,
-  "last_online":{}
+  "responses":{}
 }
 
 router.get('/', function(req, res) {
@@ -38,11 +41,13 @@ router.get('/', function(req, res) {
       return getPage(urls[key]).then(function(data) {
         switch(key) {
           case 'lastfm':
-            json.last_online[key] = data.recenttracks.track[0].date['#text'];
+            json.last_online[key] = data.recenttracks.track[0]
             break;
           case 'github':
-            json.last_online[key] = data.updated_at;
+            json.last_online[key] = data.updated_at
             break;
+          case 'echo':
+            json.last_online[key] = data
         }
       })
     })
