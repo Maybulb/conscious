@@ -37,8 +37,11 @@ I'm gonna need at least 4 APIs to get this working. Here's a list of them:
 - [Last.fm](http://www.last.fm/api)
 - [GitHub](https://developer.github.com/v3/)
 - [Echo Nest API](http://developer.echonest.com/docs/v4)
+- [Instagram](https://instagram.com/developer/endpoints/users/)<sup>1</sup>
 
 The Echo Nest API will be for tracking the energy of a song, as glossed over above. This is gonna hook in with Last.fm so we can get a song's information on a deeper level, which will be important.
+
+<sup>1</sup> There isn't an actual endpoint to find the *most* recent activity of the user (like in the "Activity" pane within the Instagram App), so we'll have to hack something together by comparing timestamps of `GET /users/user-id/media/recent` and the timestamps of the users likes (using `GET /users/user-id`).
 
 LICENSE
 -------
