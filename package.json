@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/probablyjosh/is-adam-awake#readme",
   "dependencies": {
-    "express": "^4.13.1"
+    "express": "^4.13.1",
+    "promise": "^7.0.3",
+    "superagent": "^1.2.0"
   }
 }

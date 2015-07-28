@@ -1,6 +1,8 @@
 // Organize this piece of shit later
 var http    = require('http'),
     express = require('express'),
+    agent   = require('superagent'),
+    Promise = require('promise'),
     app     = express();
 
 var port = process.env.PORT || 8080
@@ -11,17 +13,17 @@ var urls = {
   // "telegram"   : "",
   "lastfm" : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
             "&user=ltrlly&api_key=" +  process.env.LASTFM_KEY + "&format=json",
-  "github"   : "http://api.github.com/users/lwwws",
+  "github"   : "https://api.github.com/users/lwwws",
   // "echo"     : ""
 }
 
 // asssssynchronous  mMMMMMM good shit
-function getPage(url, callback) {
-  var request = http.get(url, function(response) {
-    var body = ''
-
-    response.on('data', function(chunk) { body += chunk })
-    response.on('end', function() { callback(body) })
+function getPage(url) {
+  return new Promise(function(resolve, reject) {
+    agent.get(url).end(function(err, res) {
+      if (err) return reject(err)
+      resolve(res.body)
+    });
   })
 }
 
@@ -31,10 +33,15 @@ var json = {
 }
 
 router.get('/', function(req, res) {
-  for (var url in urls) {
-    json.last_online[url] = urls[url];
-  }
-  res.json(json)
+  Promise.all(
+    Object.keys(urls).map(function(key) {
+      return getPage(urls[key]).then(function(data) {
+        json.last_online[key] = data;
+      })
+    })
+  ).then(function() {
+    res.json(json)
+  })
 })
 
 app.use('/', router)
