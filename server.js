@@ -12,7 +12,7 @@ var urls = {
   // lastfm's URL is absolutely ridiculous why isn't JSON default wtf
   // "telegram"   : "",
   "lastfm" : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
-            "&user=ltrlly&api_key=" +  process.env.LASTFM_KEY + "&format=json",
+            "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
   "github"   : "https://api.github.com/users/lwwws",
   // "echo"     : ""
 }
@@ -36,7 +36,14 @@ router.get('/', function(req, res) {
   Promise.all(
     Object.keys(urls).map(function(key) {
       return getPage(urls[key]).then(function(data) {
-        json.last_online[key] = data;
+        switch(key) {
+          case 'lastfm':
+            json.last_online[key] = data.recenttracks.track[0].date['#text'];
+            break;
+          case 'github':
+            json.last_online[key] = data.updated_at;
+            break;
+        }
       })
     })
   ).then(function() {
