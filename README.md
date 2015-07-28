@@ -33,20 +33,21 @@ The "energy" level is as follows:
 Resources
 ---------
 
-I'm gonna need at least 4 APIs to get this working. Here's a list of them:
+I'm gonna need APIs from a few different services that Adam uses to get this
+working. Here's a list of them:
 
 - [Telegram](https://core.telegram.org/#getting-started)
-- [Last.fm](http://www.last.fm/api)
 - [GitHub](https://developer.github.com/v3/)
-- [Echo Nest API](http://developer.echonest.com/docs/v4)
 - [Instagram](https://instagram.com/developer/endpoints/users/)<sup><a href="#fn1" id="f1">1</a></sup>
 - [Tumblr](https://www.tumblr.com/docs/en/api/v2)<sup><a href="#fn2" id="f2">2</a></sup>
-
-The Echo Nest API will be for tracking the energy of a song, as glossed over above. This is gonna hook in with Last.fm so we can get a song's information on a deeper level, which will be important.
+- [Last.fm](http://www.last.fm/api)
+- [Echo Nest API](http://developer.echonest.com/docs/v4)<sup><a href="#fn3" id="f3">3</a></sup>
 
 <sup><a href="#f1">1</a></sup> There isn't an actual endpoint to find the *most* recent activity of the user (like in the "Activity" pane within the Instagram App), so we'll have to hack something together by comparing timestamps of `GET /users/user-id/media/recent` and the timestamps of the users likes (using `GET /users/user-id`).
 
 <sup><a href="#f1">2</a></sup> As with Instagram, Tumblr doesn't seem to combine a user's likes and posts into one feed, but that doesn't really matter anyway since Tumblr's API doesn't give you the date a post was liked. It instead gives you the date said post was *made*, so it wouldn't be helpful in the long run.
+
+<sup><a href="#f3">3</a></sup> The Echo Nest API will be for tracking the energy of a song, as glossed over above. This is gonna hook in with Last.fm so we can get a song's information on a deeper level, which will be important. With this API we can get the energy of a song, which returns a float value from 0-1. The higher the number the more energy the song contains. We can use this to determine (or guess, really) if Adam has music playing while he's sleeping or not (soft music or not).
 
 LICENSE
 -------
