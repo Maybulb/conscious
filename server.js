@@ -11,6 +11,7 @@ var router = express.Router();
 var urls = {
   // "telegram"   : "",
   // "instagram"  : "",
+  // "tumblr"     : "",
   "lastfm"   : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
             "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
   "github"   : "https://api.github.com/users/lwwws",
