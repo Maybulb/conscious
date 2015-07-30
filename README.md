@@ -17,11 +17,11 @@ I'm looking to build an easy API to use with only a few pieces of information.
 {
 	"awake": false,
 	"last_online": {
-		"telegram": {"date":"26 06 15", "time":"24:15 PST"},
-		"github"  : {"date":"25 06 15", "time":"23:55 PST"},
-		"lastfm"  : {"date":"26 06 15", "time":"07:10 PST", "energy": 1},
-		"instagram": {"date":"26 06 15", "time":"14:20 PST"},
-		"tumblr": {"date":"26 06 15", "time":"18:09 PST"}
+		"telegram"  : {"date":"26 06 15", "time":"24:15 PST"},
+		"github"    : {"date":"25 06 15", "time":"23:55 PST"},
+		"instagram" : {"date":"26 06 15", "time":"14:20 PST"},
+		"tumblr"    : {"date":"26 06 15", "time":"18:09 PST"},
+		"lastfm"    : {"date":"26 06 15", "time":"07:10 PST", "energy": 1}
 	}
 }
 ```
