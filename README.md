@@ -17,7 +17,6 @@ I'm looking to build an easy API to use with only a few pieces of information.
 {
 	"awake": false,
 	"last_online": {
-		"telegram"  : {"date":"26 06 15", "time":"24:15 PST"},
 		"github"    : {"date":"25 06 15", "time":"23:55 PST"},
 		"instagram" : {"date":"26 06 15", "time":"14:20 PST"},
 		"tumblr"    : {"date":"26 06 15", "time":"18:09 PST"},
@@ -36,7 +35,6 @@ Resources
 I'm gonna need APIs from a few different services that Adam uses to get this
 working. Here's a list of them:
 
-- [Telegram](https://core.telegram.org/#getting-started)
 - [GitHub](https://developer.github.com/v3/)
 - [Instagram](https://instagram.com/developer/endpoints/users/)<sup><a href="#fn1" id="f1">1</a></sup>
 - [Tumblr](https://www.tumblr.com/docs/en/api/v2)<sup><a href="#fn2" id="f2">2</a></sup>

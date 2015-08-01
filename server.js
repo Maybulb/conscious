@@ -9,7 +9,6 @@ var port = process.env.PORT || 8080
 var router = express.Router();
 
 var urls = {
-  // "telegram"   : "",
   // "instagram"  : "",
   // "tumblr"     : "",
   "lastfm"   : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
@@ -38,7 +37,13 @@ router.get('/', function(req, res) {
       return get(urls[key]).then(function(data) {
         switch(key) {
           case 'lastfm':
-            json.responses[key] = data.recenttracks.track[0]
+            var lastfm = data.recenttracks.track[0]
+            json.responses.lastfm = {
+              time: lastfm.date['#text'],
+              title: lastfm.name,
+              artist: lastfm.artist['#text'],
+              energy: json.responses.song_energy
+            }
             break;
           case 'github':
             json.responses[key] = data.updated_at
@@ -53,9 +58,8 @@ router.get('/', function(req, res) {
                   process.env.ECHONEST_KEY + "&title=" + encodedSong +
                   "&artist=" + encodedArtist + "&results=1&sort=duration-desc" +
                   "&bucket=audio_summary"
-    console.log(url)
     return get(url).then(function(data) {
-      json.responses['echo'] = data
+      json.responses.lastfm.energy = data.response.songs[0].audio_summary.energy
     })
   }).then(function() {
     res.json(json)
