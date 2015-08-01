@@ -52,8 +52,8 @@ router.get('/', function(req, res) {
       })
     })
   ).then(function() {
-    var encodedArtist = encodeURIComponent(json.responses.lastfm.artist['#text'])
-    var encodedSong    = encodeURIComponent(json.responses.lastfm.name)
+    var encodedArtist = escape(json.responses.lastfm.artist['#text'])
+    var encodedSong    = escape(json.responses.lastfm.name)
     var url = "http://developer.echonest.com/api/v4/song/search?api_key=" +
                   process.env.ECHONEST_KEY + "&title=" + encodedSong +
                   "&artist=" + encodedArtist + "&results=1&sort=duration-desc" +
