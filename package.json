@@ -1,7 +1,7 @@
 {
   "name": "is-adam-awake",
   "version": "0.0.1",
-  "description": "Is Adam Lewes?",
+  "description": "Is Adam Lewes Awake?",
   "main": "server.js",
   "scripts": {
     "test": "node server.js"
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/probablyjosh/is-adam-awake#readme",
   "dependencies": {
     "express": "^4.13.1",
+    "moment": "^2.10.6",
     "promise": "^7.0.3",
     "superagent": "^1.2.0"
   }

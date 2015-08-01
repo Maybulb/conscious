@@ -1,6 +1,7 @@
 // Organize this piece of shit later
 var http    = require('http'),
     express = require('express'),
+    moment  = require('moment'),
     agent   = require('superagent'),
     Promise = require('promise'),
     app     = express();
@@ -9,11 +10,13 @@ var port = process.env.PORT || 8080
 var router = express.Router();
 
 var urls = {
-  // "instagram"  : "",
-  // "tumblr"     : "",
-  "lastfm"   : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
-            "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
-  "github"   : "https://api.github.com/users/lwwws",
+  "instagram" : "https://api.instagram.com/v1/users/" + 'adamlewes' +
+                "/media/recent/?access_token=" + process.env.INSTAGRAM_KEY,
+  "tumblr"    : "http://api.tumblr.com/v2/blog/lwws.tumblr.com/info?api_key=" +
+                process.env.TUMBLR_KEY,
+  "lastfm"    : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
+                "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
+  "github"    : "https://api.github.com/users/lwwws",
 }
 
 // asssssynchronous  mMMMMMM good shit
@@ -38,15 +41,20 @@ router.get('/', function(req, res) {
         switch(key) {
           case 'lastfm':
             var lastfm = data.recenttracks.track[0]
+            var dateAndTime = lastfm.date['#text'].split(", ")
             json.responses.lastfm = {
-              time: lastfm.date['#text'],
+              date: dateAndTime[0],
+              time: dateAndTime[1],
               title: lastfm.name,
               artist: lastfm.artist['#text'],
               energy: json.responses.song_energy
             }
             break;
           case 'github':
-            json.responses[key] = data.updated_at
+            var dateAndTime = moment(data.updated_at).format("YYYY-MM-DD hh:mm:ss")
+            json.responses[key] = {
+              actual: dateAndTime, "what the fuck": data.updated_at
+            }
             break;
         }
       })
