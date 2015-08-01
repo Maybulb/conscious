@@ -27,7 +27,7 @@ function get(url) {
 }
 
 var json = {
-  "sleeping":false,
+  "sleeping":true, // manual AF
   "responses":{}
 }
 
