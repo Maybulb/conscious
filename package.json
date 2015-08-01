@@ -1,6 +1,6 @@
 {
   "name": "is-adam-awake",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "Is Adam Lewes Awake?",
   "main": "server.js",
   "scripts": {
