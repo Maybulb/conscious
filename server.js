@@ -1,19 +1,23 @@
 // Organize this piece of shit later
 var http    = require('http'),
     express = require('express'),
+    moment  = require('moment'),
     agent   = require('superagent'),
     Promise = require('promise'),
     app     = express();
+
 
 var port = process.env.PORT || 8080
 var router = express.Router();
 
 var urls = {
-  // "instagram"  : "",
-  // "tumblr"     : "",
-  "lastfm"   : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
-            "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
-  "github"   : "https://api.github.com/users/lwwws",
+  // "instagram"    : "https://api.instagram.com/v1/users/" + 'adamlewes' +
+  //                   "/media/recent/?access_token=" + process.env.INSTAGRAM_KEY,
+  // "tumblr"       : "http://api.tumblr.com/v2/blog/lwws.tumblr.com/info?api_key=" +
+  //                   process.env.TUMBLR_KEY,
+  "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
+                    "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
+  "github"       : "https://api.github.com/users/lwwws",
 }
 
 // asssssynchronous  mMMMMMM good shit
