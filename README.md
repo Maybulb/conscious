@@ -3,6 +3,11 @@ Is Adam Lewes Awake?
 
 The golden question of today's generation.
 
+The goal of this project is to expand to support anyone, not just Adam. Users
+will be able to sign in through Twitter or Facebook, then connect the service
+with their other social networks. Information will then be thrown around until
+the final answer is given: Are you awake right now?
+
 Prologue
 ----------
 
