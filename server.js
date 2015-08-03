@@ -1,7 +1,6 @@
 // Organize this piece of shit later
 var http    = require('http'),
     express = require('express'),
-    moment  = require('moment'),
     agent   = require('superagent'),
     Promise = require('promise'),
     app     = express();
