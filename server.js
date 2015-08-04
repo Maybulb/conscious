@@ -42,11 +42,19 @@ router.get('/', function(req, res) {
           case 'lastfm':
             var lastfm = data.recenttracks.track[0]
             json.responses.lastfm = {
-              time: lastfm.date['#text'],
               title: lastfm.name,
               artist: lastfm.artist['#text'],
               energy: json.responses.song_energy
             }
+
+            if ("date" in lastfm) {
+              json.responses.lastfm.time = lastfm.date['#text']
+            } else if ("@attr" in lastfm) {
+              json.responses.lastfm.time = new Date()
+            } else {
+              throw "What the fuck is up with the time"
+            }
+
             break;
           case 'github':
             json.responses[key] = data.updated_at
@@ -66,14 +74,10 @@ router.get('/', function(req, res) {
     })
   }).then(function() {
     res.json(json)
+  }).catch(function(err) {
+    throw err
   })
 })
-
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
 
 app.use('/', router)
 app.listen(port)
