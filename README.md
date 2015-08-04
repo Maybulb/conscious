@@ -25,7 +25,7 @@ I'm looking to build an easy API to use with only a few pieces of information.
 		"github"    : {"date":"25 06 15", "time":"23:55 PST"},
 		"instagram" : {"date":"26 06 15", "time":"14:20 PST"},
 		"tumblr"    : {"date":"26 06 15", "time":"18:09 PST"},
-		"lastfm"    : {"date":"26 06 15", "time":"07:10 PST", "energy": 1}
+		"lastfm"    : {"date":"26 06 15", "time":"07:10 PST", "energy": 0.515896}
 	}
 }
 ```
