@@ -29,6 +29,22 @@ function get(url) {
   })
 }
 
+function getCurrentFormattedDate(){
+	var now = new Date()
+	var date = now.getDate()
+	var year = now.getFullYear()
+	var hour = now.getHours()
+	var minute = now.getMinutes()
+	var months = [
+	                'Jan', 'Feb', 'Mar', 'Apr',
+	                'May', 'Jun', 'Jul', 'Aug',
+	                'Sep', 'Oct', 'Nov', 'Dec'
+	              ]
+	var month = months[now.getMonth()]
+
+	return date + ' ' + month + ' ' + year + ', ' + hour + ':' + minute
+}
+
 var json = {
   "sleeping":false,
   "responses":{}
@@ -50,7 +66,7 @@ router.get('/', function(req, res) {
             if ("date" in lastfm) {
               json.responses.lastfm.time = lastfm.date['#text']
             } else if ("@attr" in lastfm) {
-              json.responses.lastfm.time = new Date()
+              json.responses.lastfm.time = getCurrentFormattedDate()
             } else {
               throw "What the fuck is up with the time"
             }
