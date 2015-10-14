@@ -21,7 +21,7 @@ API
 I'm looking to build an easy API to use with only a few pieces of information.
 
 ```
-http://woke.heroku.com/usernames?github=lw&instagram=adamlewes&tumblr=lwws&twitter=adamlewes&lastfm=ltrlly
+http://woke.heroku.com/usernames?github=lw&instagram=adamlewes&tumblr=lwwws&twitter=adamlewes&lastfm=ltrlly
 ```
 
 ```json
