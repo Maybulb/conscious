@@ -26,13 +26,28 @@ http://woke.heroku.com/usernames?github=lw&instagram=adamlewes&tumblr=lwwws&twit
 
 ```json
 {
-	"awake": false,
+	"awake": true,
 	"last_online": {
-		"github"    : {"date":"25 06 15", "time":"23:55 PST"},
-		"instagram" : {"date":"26 06 15", "time":"14:20 PST"},
-		"tumblr"    : {"date":"26 06 15", "time":"18:09 PST"},
-		"twitter"   : {"date":"26 06 15", "time":"20:18 PST"},
-		"lastfm"    : {"date":"26 06 15", "time":"07:10 PST", "energy": 0.515896}
+		"github": {
+			"date": "25 06 15",
+			"time": "23:55 PST"
+		},
+		"instagram": {
+				"date": "26 06 15",
+				"time": "14:20 PST"
+			},
+		"tumblr": {
+				"date": "26 06 15",
+				"time":"18:09 PST"
+			},
+		"twitter": {
+			"date": "26 06 15",
+			"time":"20:18 PST"
+		},
+		"lastfm": {
+			"date": "26 06 15",
+			"time": "07:10 PST", "energy": 0.515896
+		}
 	}
 }
 ```
