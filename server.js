@@ -16,7 +16,7 @@ var urls = {
   //                   process.env.TUMBLR_KEY,
   "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
                     "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
-  "github"       : "https://api.github.com/users/lwwws",
+  "github"       : "https://api.github.com/users/lw"
 }
 
 // asssssynchronous  mMMMMMM good shit
@@ -40,7 +40,7 @@ function getCurrentFormattedDate(){
 	                'May', 'Jun', 'Jul', 'Aug',
 	                'Sep', 'Oct', 'Nov', 'Dec'
 	              ]
-                
+
 	var month = months[now.getMonth()]
 
   if (hour   < 10) { hour   = "0" + hours }
