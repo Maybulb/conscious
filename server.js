@@ -3,6 +3,7 @@ var http    = require('http'),
     express = require('express'),
     agent   = require('superagent'),
     Promise = require('promise'),
+    moment  = require('moment'),
     app     = express();
 
 
@@ -12,8 +13,8 @@ var router = express.Router();
 var urls = {
   // "instagram"    : "https://api.instagram.com/v1/users/" + 'adamlewes' +
   //                   "/media/recent/?access_token=" + process.env.INSTAGRAM_KEY,
-  // "tumblr"       : "http://api.tumblr.com/v2/blog/lwws.tumblr.com/info?api_key=" +
-  //                   process.env.TUMBLR_KEY,
+  "tumblr"       : "http://api.tumblr.com/v2/blog/lwwws.tumblr.com/info?api_key=" +
+                    process.env.TUMBLR_KEY,
   "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
                     "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
   "github"       : "https://api.github.com/users/lw"
@@ -27,26 +28,6 @@ function get(url) {
       resolve(res.body)
     });
   })
-}
-
-function getCurrentFormattedDate(){
-	var now = new Date()
-	var date = now.getDate()
-	var year = now.getFullYear()
-	var hour = now.getHours()
-	var minute = now.getMinutes()
-	var months = [
-	                'Jan', 'Feb', 'Mar', 'Apr',
-	                'May', 'Jun', 'Jul', 'Aug',
-	                'Sep', 'Oct', 'Nov', 'Dec'
-	              ]
-
-	var month = months[now.getMonth()]
-
-  if (hour   < 10) { hour   = "0" + hours }
-  if (minute < 10) { minute = "0" + minutes }
-
-	return date + ' ' + month + ' ' + year + ', ' + hour + ':' + minute
 }
 
 var json = {
@@ -64,21 +45,16 @@ router.get('/', function(req, res) {
             json.responses.lastfm = {
               title: lastfm.name,
               artist: lastfm.artist['#text'],
+              time: moment.unix(lastfm.date['uts']).fromNow(),
               energy: json.responses.song_energy
-            }
-
-            if ("date" in lastfm) {
-              json.responses.lastfm.time = lastfm.date['#text']
-            } else if ("@attr" in lastfm) {
-              json.responses.lastfm.time = getCurrentFormattedDate()
-            } else {
-              throw "What the fuck is up with the time"
             }
 
             break;
           case 'github':
             json.responses[key] = data.updated_at
             break;
+          case 'tumblr':
+            json.responses[key] = moment.unix(data.response.blog.updated).fromNow()
         }
       })
     })
@@ -95,7 +71,7 @@ router.get('/', function(req, res) {
   }).then(function() {
     res.json(json)
   }).catch(function(err) {
-    throw err
+    res.status(500).send("Uh oh, something broke")
   })
 })
 

@@ -27,5 +27,8 @@
     "express": "^4.13.1",
     "promise": "^7.0.3",
     "superagent": "^1.2.0"
+  },
+  "devDependencies": {
+    "moment": "^2.10.6"
   }
 }
