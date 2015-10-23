@@ -12,7 +12,7 @@ the final answer is given: Are you (or any other user) awake right now?
 Prologue
 ----------
 
-Adam's decided to make an effort to improve upon his sleep schedule, but only on some days/nights. Communication with him started becoming an issue, and I'd have to determine
+Adam decided to make an effort to improve upon his sleep schedule, but only on some days/nights. Communication with him started becoming an issue, and I'd have to determine
 a lot of times of guesses and his timezone whether or not he was awake or not. Woke plans to solve this with a simple API, as mentioned below.
 
 API
