@@ -71,7 +71,7 @@ router.get('/', function(req, res) {
   }).then(function() {
     res.json(json)
   }).catch(function(err) {
-    res.status(500).send("Uh oh, something broke")
+    res.status(500).sendFile('http://i.imgur.com/lkoqIYO.jpg') // @dril is my dad
   })
 })
 
