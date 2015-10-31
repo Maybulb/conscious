@@ -6,6 +6,7 @@ var http    = require('http'),
     moment  = require('moment'),
     app     = express();
 
+console.log(process.env);
 
 var port = process.env.PORT || 8080
 var router = express.Router();
