@@ -71,6 +71,7 @@ router.get('/', function(req, res) {
   }).then(function() {
     res.json(json)
   }).catch(function(err) {
+    throw err
     res.status(500).send('are you having a crap of me mate??  Are you, having a crap of me mate') // @dril is my dad
   })
 })
