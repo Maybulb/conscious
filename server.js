@@ -35,8 +35,8 @@ var json = {
 router.get('/', function(req, res) {
   Promise.all(
     Object.keys(urls).map(function(key) {
-      var url = util.format(urls[key], req.params[key])
-      return get(urls[key]).then(function(data) {
+      var url = util.format(urls[key], req.query[key])
+      return get(url).then(function(data) {
         switch(key) {
           case 'lastfm':
             var lastfm = data.recenttracks.track[0]
@@ -78,7 +78,7 @@ router.get('/', function(req, res) {
     // delete json.responses.lastfm['artist'] // Why
     res.json(json)
   }).catch(function(err) {
-    throw err
+    console.error(err);
     res.status(500).send('are you having a crap of me mate??  Are you, having a crap of me mate') // @dril is my dad
   })
 })
