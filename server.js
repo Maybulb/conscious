@@ -24,11 +24,6 @@ var urls = {
 function get(url) {
   return new Promise(function(resolve, reject) {
     agent.get(url).end(function(err, res) {
-      console.log('---');
-      console.log(url);
-      console.log(err);
-      console.log(res);
-      console.log('---');
       if (err) return reject(err)
       resolve(res.body)
     });
