@@ -1,4 +1,5 @@
-// Organize this piece of shit later
+console.log('running on port 8080')
+
 var http    = require('http'),
     express = require('express'),
     agent   = require('superagent'),
@@ -11,12 +12,8 @@ var port = process.env.PORT || 8080
 var router = express.Router();
 
 var urls = {
-  // "instagram"    : "https://api.instagram.com/v1/users/" + 'adamlewes' +
-  //                   "/media/recent/?access_token=" + process.env.INSTAGRAM_KEY,
-  "tumblr"       : "http://api.tumblr.com/v2/blog/lwwws.tumblr.com/info?api_key=" +
-                    process.env.TUMBLR_KEY,
-  "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks" +
-                    "&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
+  "tumblr"       : "http://api.tumblr.com/v2/blog/lwwws.tumblr.com/info?api_key=" + process.env.TUMBLR_KEY,
+  "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
   "github"       : "https://api.github.com/users/lw"
 }
 
@@ -31,7 +28,6 @@ function get(url) {
 }
 
 var json = {
-  "sleeping":false,
   "responses":{}
 }
 
@@ -45,16 +41,23 @@ router.get('/', function(req, res) {
             json.responses.lastfm = {
               title: lastfm.name,
               artist: lastfm.artist['#text'],
-              time: moment.unix(lastfm.date['uts']).fromNow(),
+              relative: moment.unix(lastfm.date['uts']).fromNow(),
+              exact: moment.unix(lastfm.date['uts']),
               energy: json.responses.song_energy
             }
 
             break;
           case 'github':
-            json.responses[key] = data.updated_at
+            json.responses[key] = {
+                "relative": moment.utc(data.updated_at).fromNow(),
+                "exact": data.updated_at
+              }
             break;
           case 'tumblr':
-            json.responses[key] = moment.unix(data.response.blog.updated).fromNow()
+            json.responses[key] = {
+              "relative": moment.unix(data.response.blog.updated).fromNow(),
+              "exact": moment.unix(data.response.blog.updated)
+            }
         }
       })
     })
@@ -69,6 +72,8 @@ router.get('/', function(req, res) {
       json.responses.lastfm.energy = data.response.songs[0].audio_summary.energy
     })
   }).then(function() {
+    delete json.responses.lastfm['title'] // This is too much
+    delete json.responses.lastfm['artist'] // Why
     res.json(json)
   }).catch(function(err) {
     throw err
@@ -84,3 +89,6 @@ app.all('/', function(req, res, next) {
 
 app.use('/', router)
 app.listen(port)
+
+
+// This is the worst js file in the world.......
