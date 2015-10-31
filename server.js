@@ -5,6 +5,7 @@ var http    = require('http'),
     agent   = require('superagent'),
     Promise = require('promise'),
     moment  = require('moment'),
+    util    = require('util'),
     app     = express();
 
 
@@ -12,9 +13,9 @@ var port = process.env.PORT || 8080
 var router = express.Router();
 
 var urls = {
-  "tumblr"       : "http://api.tumblr.com/v2/blog/lwwws.tumblr.com/info?api_key=" + process.env.TUMBLR_KEY,
-  "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=ltrlly&api_key=" + process.env.LASTFM_KEY + "&format=json",
-  "github"       : "https://api.github.com/users/lw"
+  "tumblr"       : "http://api.tumblr.com/v2/blog/%s/info?api_key=" + process.env.TUMBLR_KEY,
+  "lastfm"       : "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=%s&api_key=" + process.env.LASTFM_KEY + "&format=json",
+  "github"       : "https://api.github.com/users/%s"
 }
 
 // asssssynchronous  mMMMMMM good shit
@@ -34,9 +35,10 @@ var json = {
 router.get('/', function(req, res) {
   Promise.all(
     Object.keys(urls).map(function(key) {
+      var url = util.format(urls[key], req.params[key])
       return get(urls[key]).then(function(data) {
         switch(key) {
-          case 'lastfm':
+          case 'lastfm':
             var lastfm = data.recenttracks.track[0]
             json.responses.lastfm = {
               title: lastfm.name,
@@ -46,19 +48,19 @@ router.get('/', function(req, res) {
               energy: json.responses.song_energy
             }
 
-            break;
-          case 'github':
-            json.responses[key] = {
+            break;
+          case 'github':
+            json.responses[key] = {
                 "relative": moment.utc(data.updated_at).fromNow(),
                 "exact": data.updated_at
               }
-            break;
+            break;
           case 'tumblr':
             json.responses[key] = {
               "relative": moment.unix(data.response.blog.updated).fromNow(),
               "exact": moment.unix(data.response.blog.updated)
             }
-        }
+        }
       })
     })
   ).then(function() {
@@ -72,8 +74,8 @@ router.get('/', function(req, res) {
       json.responses.lastfm.energy = data.response.songs[0].audio_summary.energy
     })
   }).then(function() {
-    delete json.responses.lastfm['title'] // This is too much
-    delete json.responses.lastfm['artist'] // Why
+    // delete json.responses.lastfm['title'] // This is too much
+    // delete json.responses.lastfm['artist'] // Why
     res.json(json)
   }).catch(function(err) {
     throw err
