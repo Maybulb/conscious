@@ -67,7 +67,7 @@ router.get('/', function(req, res) {
         } catch (err) {
           console.error(err)
           json.responses[key] = {
-            error: 'Parse Error'
+            error: 'Parse Error (' + key + ')'
           }
         }
       }, function (err) {
