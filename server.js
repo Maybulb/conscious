@@ -28,11 +28,11 @@ function get(url) {
   })
 }
 
-var json = {
-  "responses":{}
-}
-
 router.get('/', function(req, res) {
+  var json = {
+    "responses":{}
+  }
+
   Promise.all(
     Object.keys(urls).map(function(key) {
       var url = util.format(urls[key], req.query[key])
