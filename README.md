@@ -26,7 +26,7 @@ http://woke.heroku.com/usernames?github=lw&instagram=adamlewes&tumblr=lwwws&twit
 
 ```json
 {
-	"awake": true,
+	"awake": 0.88,
 	"last_online": {
 		"github": {
 			"date": "25 06 15",
