@@ -37,48 +37,74 @@ router.get('/', function(req, res) {
     Object.keys(urls).map(function(key) {
       var url = util.format(urls[key], req.query[key])
       return get(url).then(function(data) {
-        switch(key) {
-          case 'lastfm':
-            var lastfm = data.recenttracks.track[0]
-            json.responses.lastfm = {
-              title: lastfm.name,
-              artist: lastfm.artist['#text'],
-              relative: moment.unix(lastfm.date['uts']).fromNow(),
-              exact: moment.unix(lastfm.date['uts']),
-              energy: json.responses.song_energy
-            }
+        try {
+          switch (key) {
+            case 'lastfm':
+              var lastfm = data.recenttracks.track[0]
+              json.responses.lastfm = {
+                title: lastfm.name,
+                artist: lastfm.artist['#text'],
+                relative: moment.unix(lastfm.date['uts']).fromNow(),
+                exact: moment.unix(lastfm.date['uts']),
+                energy: json.responses.song_energy
+              }
+              break;
 
-            break;
-          case 'github':
-            json.responses[key] = {
+            case 'github':
+              json.responses[key] = {
                 "relative": moment.utc(data.updated_at).fromNow(),
                 "exact": data.updated_at
               }
-            break;
-          case 'tumblr':
-            json.responses[key] = {
-              "relative": moment.unix(data.response.blog.updated).fromNow(),
-              "exact": moment.unix(data.response.blog.updated)
-            }
+              break;
+
+            case 'tumblr':
+              json.responses[key] = {
+                "relative": moment.unix(data.response.blog.updated).fromNow(),
+                "exact": moment.unix(data.response.blog.updated)
+              }
+              break;
+          }
+        } catch (err) {
+          console.error(err)
+          json.responses[key] = {
+            error: 'Parse Error'
+          }
+        }
+      }, function (err) {
+        console.error(err)
+        json.responses[key] = {
+          error: 'API Error (' + key + ')'
         }
       })
     })
   ).then(function() {
-    var encodedArtist = encodeURI(json.responses.lastfm.artist['#text'])
-    var encodedSong   = encodeURI(json.responses.lastfm.name)
-    var url = "http://developer.echonest.com/api/v4/song/search?api_key=" +
-                  process.env.ECHONEST_KEY + "&title=" + encodedSong +
-                  "&artist=" + encodedArtist + "&results=1&sort=duration-desc" +
-                  "&bucket=audio_summary"
-    return get(url).then(function(data) {
-      json.responses.lastfm.energy = data.response.songs[0].audio_summary.energy
-    })
+    try {
+      var encodedArtist = encodeURI(json.responses.lastfm.artist['#text'])
+      var encodedSong = encodeURI(json.responses.lastfm.name)
+      var url = "http://developer.echonest.com/api/v4/song/search?api_key=" +
+          process.env.ECHONEST_KEY + "&title=" + encodedSong +
+          "&artist=" + encodedArtist + "&results=1&sort=duration-desc" +
+          "&bucket=audio_summary"
+      return get(url).then(function (data) {
+        json.responses.lastfm.energy = data.response.songs[0].audio_summary.energy
+      }, function (err) {
+        console.error(err)
+        json.responses.lastfm = {
+          error: 'API Error (echonest)'
+        }
+      })
+    } catch (err) {
+      console.error(err)
+      json.responses.lastfm = {
+        error: 'Parse Error (echonest)'
+      }
+    }
   }).then(function() {
     // delete json.responses.lastfm['title'] // This is too much
     // delete json.responses.lastfm['artist'] // Why
     res.json(json)
   }).catch(function(err) {
-    console.error(err);
+    console.error(err)
     res.status(500).send('are you having a crap of me mate??  Are you, having a crap of me mate') // @dril is my dad
   })
 })
