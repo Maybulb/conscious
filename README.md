@@ -1,4 +1,4 @@
-Woke
+Concious
 ====
 
 The golden question of today's generation.
@@ -20,6 +20,8 @@ Info
 We ([Bright](https://github.com/madebybright)) are not responsible for how a person/persons may use this service ([Woke](https://github.com/madebybright/woke/)), nor do we promote or condone the use of this software for reasons that violate international law. 
 
 Basically, if you're using this for creepy or weird illegal shit, fuck off.
+
+The following will soon be ported to [woke](https://github.com/madebybright/woke). Concious will be the service powered by woke.
 
 API
 ---
