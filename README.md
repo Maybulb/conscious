@@ -1,4 +1,4 @@
-Concious
+Conscious
 ====
 
 The golden question of today's generation.
