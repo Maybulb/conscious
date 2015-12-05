@@ -17,7 +17,7 @@ a lot of times of guesses and his timezone whether or not he was awake or not. W
 
 Info
 ----
-We ([Bright](https://github.com/madebybright)) are not responsible for how a person/persons may use this service ([Woke](https://github.com/madebybright/woke/)), nor do we promote or condone the use of this software for reasons that violate international law. 
+We ([Bright](https://github.com/madebybright)) are not responsible for how a person/persons may use this service ([Woke](https://github.com/madebybright/woke/) or [Conscious](https://github.com/madebybright/conscious/)), nor do we promote or condone the use of this software for reasons that violate international law. 
 
 Basically, if you're using this for creepy or weird illegal shit, fuck off.
 
