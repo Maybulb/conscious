@@ -1,33 +1,11 @@
 {
-  "name": "is-adam-awake",
-  "version": "0.0.1",
-  "description": "Is Adam Lewes?",
+  "name": "conscious",
+  "version": "1.0.0",
   "main": "server.js",
-  "scripts": {
-    "test": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/probablyjosh/is-adam-awake.git"
-  },
-  "keywords": [
-    "adam",
-    "lewes",
-    "adamlewes",
-    "awake",
-    "sleeping"
-  ],
-  "author": "Josh Trommel",
+  "repository": "https://github.com/maybulb/conscious",
+  "author": "Maybulb",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/probablyjosh/is-adam-awake/issues"
-  },
-  "homepage": "https://github.com/probablyjosh/is-adam-awake#readme",
   "dependencies": {
-    "express": "^4.13.1",
-    "moment": "^2.10.6",
-    "promise": "^7.0.3",
-    "superagent": "^1.2.0",
-    "moment": "^2.10.6"
+    "express": "^4.14.0"
   }
 }
