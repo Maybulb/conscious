@@ -1,11 +1,13 @@
 {
   "name": "conscious",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "repository": "https://github.com/maybulb/conscious",
   "author": "Maybulb",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "request": "^2.79.0"
   }
 }

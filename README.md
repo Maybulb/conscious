@@ -3,6 +3,11 @@ Conscious
 
 The golden question of today's generation.
 
+Development
+-----------
+
+`git clone`, `yarn install`, `node index.js`.
+
 Goal
 ----
 Users will be able to sign in through Twitter or Facebook, then connect the service
